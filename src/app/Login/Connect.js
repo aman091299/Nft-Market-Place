@@ -11,7 +11,7 @@ const ConnectWallet = () => {
   const {ethereum}=window;
   },[])
   
-  console.log("ethereum",ethereum);
+  
   const connectWallet = async () => {
     if (ethereum) {
       const accounts = await ethereum.request({

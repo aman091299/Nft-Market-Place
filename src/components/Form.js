@@ -40,7 +40,7 @@ const validationSchema = yup.object({
 });
 
 const Form = () => {
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const contractAddress = "0x5A40306ba6f7cF5642EffB6Fc1e495300786049b";
   const nftAbi = NFTMarketPlace.abi;
 
   const formik = useFormik({
@@ -124,6 +124,7 @@ const Form = () => {
       const contract = await smartContract();
 
       let listingPrice = await contract.getListingPrice();
+      console.log("listing Price",listingPrice);
       const price = ethers.parseUnits(formik.values.price, "ether");
 
       let transaction = await contract.createToken(
