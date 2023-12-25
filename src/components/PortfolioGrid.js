@@ -13,12 +13,13 @@ import LinkIcon from '@mui/icons-material/Link';
 import Link from '@mui/material/Link';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import {ethers} from "ethers";
-import NFTMarketPlace from "./NFTMarketPlace.json"
+import NFTMarketPlace from "../app/AbiNft/NFTMarketPlace.json"
+import contractAddress from "../app/AbiNft/contractAddress"
 
 const PortfolioGrid = ({ data = [], buttonShow }) => {
   const theme = useTheme();
  
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
   const nftAbi = NFTMarketPlace.abi;
 
   async function smartContract(){

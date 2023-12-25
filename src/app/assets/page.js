@@ -8,11 +8,12 @@ import Hero from "../../components/Hero";
 import PortfolioGrid from "../../components/PortfolioGrid";
 import Contact from "../../components/Contact";
 import axios from "axios";
-import NFTMarketPlace from "../../components/NFTMarketPlace.json";
+import NFTMarketPlace from "../AbiNft/NFTMarketPlace.json";
+import contractAddress from "../AbiNft/contractAddress"
 import { ethers } from "ethers";
 
 export default function CreateItem() {
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
   const nftAbi = NFTMarketPlace.abi;
 
   const theme = useTheme();

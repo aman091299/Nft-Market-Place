@@ -7,7 +7,8 @@ import Container from '../../components/Container';
 import PortfolioGrid from '../../components/PortfolioGrid';
 import Contact from '../../components/Contact';
 import {ethers} from 'ethers'
-import NFTMarketPlace from '../../components/NFTMarketPlace.json'
+import NFTMarketPlace from '../AbiNft/NFTMarketPlace.json'
+import contractAddress from "../AbiNft/contractAddress"
 import axios from 'axios';
 const AllNfts = () => {
   const theme = useTheme();
@@ -16,7 +17,7 @@ const AllNfts = () => {
   const [totalPrice,updateTotalPrice]=useState("");
   const [address,updateAddress]=useState("0x")
 
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
   const nftAbi = NFTMarketPlace.abi;
 
   useEffect(() => {

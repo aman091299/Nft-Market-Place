@@ -19,7 +19,8 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 
-import NFTMarketPlace from "./NFTMarketPlace.json";
+import NFTMarketPlace from "../app/AbiNft/NFTMarketPlace.json";
+import contractAddress from "../app/AbiNft/contractAddress";
 
 const validationSchema = yup.object({
   name: yup
@@ -40,7 +41,7 @@ const validationSchema = yup.object({
 });
 
 const Form = () => {
-  const contractAddress = "0x5A40306ba6f7cF5642EffB6Fc1e495300786049b";
+
   const nftAbi = NFTMarketPlace.abi;
 
   const formik = useFormik({
@@ -106,12 +107,14 @@ const Form = () => {
   async function smartContract() {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
+    console.log("-------------",contractAddress);
     const contract = new ethers.Contract(contractAddress, nftAbi, signer);
     return contract;
   }
 
   async function listNft() {
     console.log("inside listNft");
+    console.log("cntract",contractAddress);
     try {
       console.log("fileUrl",fileUrl)
       const metadataURL = await uploadMetadataToIPFS();
@@ -126,10 +129,11 @@ const Form = () => {
       let listingPrice = await contract.getListingPrice();
       console.log("listing Price",listingPrice);
       const price = ethers.parseUnits(formik.values.price, "ether");
+      console.log("listing Price-----",price);
 
       let transaction = await contract.createToken(
         metadataURL,
-        formik.values.price,
+        price,
         { value: listingPrice }
       );
       const createToken = await transaction.wait();

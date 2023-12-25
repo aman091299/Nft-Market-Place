@@ -7,19 +7,32 @@ import FeaturedNfts from "../../components/FeaturedNfts";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import NFTMarketPlace from "../../components/NFTMarketPlace.json";
+import NFTMarketPlace from "../AbiNft/NFTMarketPlace.json";
 import axios from "axios";
 import HomeGrid from "../../components/HomeGrid";
 import Contact from "../../components/Contact";
 import { ethers } from "ethers";
+import contractAddress from "../AbiNft/contractAddress";
 
+import SearchBar from "../../components/SearchBar";
 const AllNft = () => {
   const theme = useTheme();
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
   const nftAbi = NFTMarketPlace.abi;
-
   const [nfts, setNfts] = useState([]);
   const [loaded, setLoaded] = useState(false);
+
+
+  const handleSearch = (e) => {
+     console.log("e",e)
+    console.log("nfts2", nfts);
+    const filteredNft = nfts.filter(( nft ) => {
+      return nft?.description.toLowerCase().includes(e.toLowerCase());
+    });
+    console.log("filteredNft",filteredNft)
+    if (filteredNft.length) {
+      setNfts(filteredNft);
+    }
+  };
 
   useEffect(() => {
     getAllNft();
@@ -53,7 +66,7 @@ const AllNft = () => {
 
             const price = ethers.formatUnits(
               unformattedPrice.toString(),
-              "wei"
+              "ether"
             );
 
             return {
@@ -71,7 +84,7 @@ const AllNft = () => {
       );
       setNfts(items);
       setLoaded(true);
-      console.log("items", items);
+      
       return items;
     } catch (error) {
       console.log(error);
@@ -81,6 +94,7 @@ const AllNft = () => {
   if (loaded && !nfts.length)
     return (
       <Main>
+        <SearchBar handleSearch={handleSearch}/>
         <Container>
           <HeroHeading />
         </Container>
@@ -121,6 +135,7 @@ const AllNft = () => {
     );
   return (
     <Main>
+       <SearchBar handleSearch={handleSearch}/>
       <Container>
         <HeroHeading />
       </Container>
