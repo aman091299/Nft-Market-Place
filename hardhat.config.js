@@ -5,7 +5,6 @@ const { API_URL, PRIVATE_KEY } = process.env;
 
 module.exports = {
   solidity: "0.8.9",
-<<<<<<< HEAD
   defaultNetwork: "sepolia",
   networks: {
     hardhat: {},
@@ -15,7 +14,3 @@ module.exports = {
     }
   },
 }
-=======
-};
-
->>>>>>> 28d70d6ce38bdd53510d53cfcb86a7e2733b6874
